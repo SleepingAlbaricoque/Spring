@@ -1,0 +1,38 @@
+package kr.co.ch03.advice;
+
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
+
+@Aspect
+@Component
+public class AroundAdvice {
+	
+	@Pointcut("execution(* kr.co.ch03.AOPService.delete*(..))")
+	public void deletePointcut() {}
+	
+	@Pointcut("execution(* kr.co.ch03.AOPService.insert*(..))")
+	public void insertPointcut() {}
+	
+	@Around("deletePointcut()")	
+	public void around1(ProceedingJoinPoint pjp) throws Throwable{ // pjp는 핵심관심 모듈(클래스) = pointcut이 들어오는 것
+		System.out.println("횡단관심 - around1 before");
+		
+		pjp.proceed();
+		
+		System.out.println("횡단관심 - around1 after");
+	}
+	
+	@Around("insertPointcut()")	
+	public void around2(ProceedingJoinPoint pjp) throws Throwable{ // pjp는 핵심관심 모듈(클래스) = pointcut이 들어오는 것
+		System.out.println("횡단관심 - around1 before");
+		
+		pjp.proceed();
+		
+		System.out.println("횡단관심 - around1 after");
+	}
+	
+	
+}
